@@ -1,0 +1,39 @@
+## Hadoop 课程作业
+
+1（基础题）：
+
+参考PPT最后的部分，编译运行 HadoopTutorial 文件夹里面的程序，Data文件作为输入。计算十点以前和十点以后的用户停留基站，把最终结果截图。
+
+2（进阶题）：
+
+这里的程序并没有如设想所说在输出阶段只保留三个最长停留基站，请修改原代码实现这个功能。
+并利用 DataGenerator 生成 100 个以上的用户的数据，以其作为输入计算最长停留的三个基站，时间以09时和17时分割为三个时间段。把最终结果截图。
+
+PS. BaseStationDataGenerator 程序的运行方法是： 
+
+python BaseStationDataGenerator.py 输出文件路径 用户数 日期 文件类型
+
+文件类型有两种， 'pos' 代表本课程介绍的位置数据，'net' 代表网络数据
+
+
+
+#cmd
+
+python  BaseStationDataGenerator.py POS.txt 10000 2013-09-12 pos
+
+python  BaseStationDataGenerator.py NET.txt 10000 2013-09-12 net
+
+
+hadoop jar BaseStationDataPreprocess.jar cn.dataguru.haddop-BaseStationDataPreprocess
+
+#compile
+
+javac -classpath $HADOOP_HOME/share/hadoop/common/hadoop-common-2.6.0.jar:$HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-client-core-2.6.0.jar -d /home/hadoop/WordCount/WordCount_class /home/hadoop/workspace/HelloWorld/src/com/test/WordCount.java
+
+
+#run app 
+
+hadoop jar ./target/wordcount-0.0.1-SNAPSHOT.jar   com.javacodegeeks.examples.basestation.BaseStationDataPreprocess    /user/aml/basestation/test  /user/aml/basestation/output  2012-09-12 07-09-17-24 
+
+
+hadoop jar ./target/wordcount-0.0.1-SNAPSHOT.jar com.javacodegeeks.examples.wordcount.WordCount   /user/aml/hello/input  /user/aml/hello/output 
